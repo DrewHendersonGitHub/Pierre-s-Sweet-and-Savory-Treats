@@ -1,0 +1,85 @@
+@using Bakery.Models
+@model Bakery.ViewModels.UserViewModel
+
+@{
+  Layout = "_Layout";
+}
+
+<h2><em>Welcome to Pierre's Bakery</em></h2>
+<hr>
+
+@if (User.Identity.IsAuthenticated)
+{
+  <h4>@Html.ActionLink(@User.Identity.Name, "Index", "Account")</h4>
+  <button>@Html.ActionLink("Logout", "Logout", "Account")</button>
+}
+else
+{
+  <button>@Html.ActionLink("Register", "Register", "Account")</button>
+  <button>@Html.ActionLink("Login", "Login", "Account")</button>
+}
+
+@if (Model.Treats.Count != 0)
+{
+  <h3>All Treats:</h3>
+  @foreach (Flavor f in Model.Flavors)
+  {
+    <tr>
+    <td>@f.FlavorId</td>
+    <td>@f.Name</td>
+    <td>@f.JoinEntities.Count</td>
+    <td>
+      @Html.ActionLink("Details", "Details", "Flavors", new { id = f.FlavorId })
+      @if (Model.UserId == f.User.Id)
+      {
+        <span> | </span>
+        @Html.ActionLink("Edit", "Edit", "Flavors", new { id = f.FlavorId })
+        <span> | </span>
+        @Html.ActionLink("Delete", "Delete", "Flavors", new { id = f.FlavorId }) 
+      }
+    </td>
+    </tr>
+  }
+}
+else
+{
+  <h3>There are no treats yet</h3>
+}
+@if (User.Identity.IsAuthenticated)
+{
+  @Html.ActionLink("Add Treat", "Create", "Treats")
+}
+
+<hr>
+
+@if (Model.Flavors.Count != 0)
+{
+  <h3>All Flavors:</h3>
+  @foreach (Flavor f in Model.Flavors)
+  {
+    <tr>
+    <td>@f.FlavorId</td>
+    <td>@f.Name</td>
+    <td>@f.JoinEntities.Count</td>
+    <td>
+      @Html.ActionLink("Details", "Details", "Flavors", new { id = f.FlavorId })
+      @if (Model.UserId == f.User.Id)
+      {
+        <span> | </span>
+        @Html.ActionLink("Edit", "Edit", "Flavors", new { id = f.FlavorId })
+        <span> | </span>
+        @Html.ActionLink("Delete", "Delete", "Flavors", new { id = f.FlavorId }) 
+      }
+    </td>
+    </tr>
+  }
+}
+else
+{
+  <h3>There are no flavors yet</h3>
+}
+@if (User.Identity.IsAuthenticated)
+{
+  @Html.ActionLink("Add Flavor", "Create", "Flavors")
+}
+<hr>

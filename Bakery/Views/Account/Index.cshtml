@@ -1,0 +1,16 @@
+<h2>Account</h2>
+
+@{
+  Layout = "_Layout";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+  <h4>You're logged in</h4>
+  <a href='@Url.Action("Logout", "Account")'><button type='button'>Logout</button></a>
+}
+else
+{
+  <a href='@Url.Action("Register", "Account")'><button type='button'>Register</button></a>
+  <a href='@Url.Action("Login", "Account")'><button type='button'>Login</button></a>
+}

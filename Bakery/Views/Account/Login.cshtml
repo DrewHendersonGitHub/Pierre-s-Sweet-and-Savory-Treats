@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+
+<h2>Log In:</h2>
+
+@model Bakery.ViewModels.LoginViewModel
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(u => u.Email)
+  @Html.TextBoxFor(u => u.Email)
+  @Html.ValidationMessageFor(u => u.Email)
+
+  @Html.LabelFor(u => u.Password)
+  @Html.PasswordFor(u => u.Password)
+  @Html.ValidationMessageFor(u => u.Password)
+  <br>
+  <button>Submit</button>
+}

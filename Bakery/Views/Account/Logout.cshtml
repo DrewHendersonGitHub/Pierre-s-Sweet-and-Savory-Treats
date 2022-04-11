@@ -1,0 +1,10 @@
+@{
+  Layout = "_Layout";
+}
+
+<h2>Logout?</h2>
+@using (Html.BeginForm("LogoutConfirmed", "Account", FormMethod.Post))
+{
+  <button>Yes</button>
+}
+<button>@Html.ActionLink("No", "Index", "Account")</button>
