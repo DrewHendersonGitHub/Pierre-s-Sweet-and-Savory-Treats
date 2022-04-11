@@ -13,7 +13,6 @@ namespace Bakery.Models
         .SetBasePath(Directory.GetCurrentDirectory())
         .AddJsonFile("appsettings.json")
         .Build();
-
       var builder = new DbContextOptionsBuilder<BakeryContext>();
       builder.UseMySql(configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(configuration["ConnectionStrings:DefaultConnection"]));
       return new BakeryContext(builder.Options);
