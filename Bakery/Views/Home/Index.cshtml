@@ -6,7 +6,14 @@
 }
 
 <h2><em>Welcome to Pierre's Bakery</em></h2>
-<p>Make an account or login to add flavors and treats.</p>
+@if (User.Identity.IsAuthenticated)
+{
+  <p>Good to see you, @User.Identity.Name!</p>
+}
+else
+{
+  <p>Make an account or login to add flavors and treats.</p>
+}
 <hr>
 
 <h2>@Html.ActionLink("Treats:", "Index", "Treats")</h2>
@@ -48,7 +55,6 @@ else
       @Html.ActionLink("Edit", "Edit", "Flavors", new { id = f.FlavorId }) •
       @Html.ActionLink("Delete", "Delete", "Flavors", new { id = f.FlavorId })</h6>
     </details>
-    <br>
   }
 }
 else

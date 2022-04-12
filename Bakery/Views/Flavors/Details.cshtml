@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Bakery.Models.Flavor
+
+<h5>Flavor:</h5>
+<h2>@Model.Name</h2>
+<hr>
+<p>Flavor ID: @Model.FlavorId</p>  
+<p>Treats Amount: @Model.JoinEntities.Count()</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+  <a href='@Url.Action("Edit", "Flavors", new { id = Model.FlavorId })'><button type='button'>Edit Flavor</button></a>
+  <a href='@Url.Action("Delete", "Flavors", new { id = Model.FlavorId })'><button type='button'>Delete Flavor</button></a>
+}
+
+@if (Model.JoinEntities.Count() > 0)
+{
+  <h5>Treats:</h5>
+  
+}

@@ -1,0 +1,30 @@
+@using Bakery.Models
+
+@{
+  Layout = "_Layout";
+}
+
+<h1>Treats</h1>
+
+@if (@Model.Count == 0)
+{
+  <h3>No Treats have been created yet!</h3>
+}
+else
+{
+  @foreach (Treat t in Model)
+  {
+    <details>
+      <summary>@t.Name</summary>
+      <h6>@Html.ActionLink("Details", "Details", "Treats", new { id = t.TreatId }) •
+      @Html.ActionLink("Edit", "Edit", "Treats", new { id = t.TreatId }) •
+      @Html.ActionLink("Delete", "Delete", "Treats", new { id = t.TreatId })</h6>
+    </details>
+    <br>
+  }
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+  <h2>@Html.ActionLink("Add new treat:", "Create", "Treats")</h2>
+}

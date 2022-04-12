@@ -13,9 +13,9 @@ namespace Bakery.Controllers
     {
       _db = db;
     }
+
     public ActionResult Index()
     {
-      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var model = new UserViewModel {
         Flavors = _db.Flavors.ToList(),
         Treats = _db.Treats.ToList()

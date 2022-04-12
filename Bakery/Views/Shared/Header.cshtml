@@ -1,7 +1,10 @@
 @if (User.Identity.IsAuthenticated)
 {
-  <h4>@Html.ActionLink(@User.Identity.Name, "Index", "Account")</h4>
-  <button>@Html.ActionLink("Logout", "Logout", "Account")</button>
+  <details>
+    <summary>My Account</summary>
+    <p>@Html.ActionLink("Account Page", "Index", "Account")</p>
+    <button>@Html.ActionLink("Logout", "Logout", "Account")</button>
+  </details>
 }
 else
 {

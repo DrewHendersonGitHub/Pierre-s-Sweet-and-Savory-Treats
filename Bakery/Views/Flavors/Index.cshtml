@@ -1,3 +1,5 @@
+@using Bakery.Models
+
 @{
   Layout = "_Layout";
 }
@@ -10,7 +12,16 @@
 }
 else
 {
-  
+  @foreach (Flavor f in Model)
+  {
+    <details>
+      <summary>@f.Name</summary>
+      <h6>@Html.ActionLink("Details", "Details", "Flavors", new { id = f.FlavorId }) •
+      @Html.ActionLink("Edit", "Edit", "Flavors", new { id = f.FlavorId }) •
+      @Html.ActionLink("Delete", "Delete", "Flavors", new { id = f.FlavorId })</h6>
+    </details>
+    <br>
+  }
 }
 
 @if (User.Identity.IsAuthenticated)

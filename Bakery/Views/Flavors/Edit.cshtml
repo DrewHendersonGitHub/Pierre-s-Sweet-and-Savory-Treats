@@ -1,0 +1,17 @@
+@model Bakery.Models.Flavor
+
+@{
+  Layout = "_Layout";
+}
+
+<h4>Edit @Model.Name:</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(t => t.FlavorId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
+
+  <input type="submit" value="Save" />
+}
