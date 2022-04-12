@@ -1,0 +1,10 @@
+@if (User.Identity.IsAuthenticated)
+{
+  <h4>@Html.ActionLink(@User.Identity.Name, "Index", "Account")</h4>
+  <button>@Html.ActionLink("Logout", "Logout", "Account")</button>
+}
+else
+{
+  <button>@Html.ActionLink("Register", "Register", "Account")</button>
+  <button>@Html.ActionLink("Login", "Login", "Account")</button>
+}

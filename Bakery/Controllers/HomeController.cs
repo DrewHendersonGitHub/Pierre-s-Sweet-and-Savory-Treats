@@ -16,16 +16,11 @@ namespace Bakery.Controllers
     public ActionResult Index()
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      var HomeModel = new UserViewModel {
-        Flavors = _db.Flavors.ToList()
-          .OrderByDescending(f => f.User.Id == userId)
-          .ToList(),
-        Treats = _db.Treats
-          .OrderByDescending(t => t.User.Id == userId)
-          .ToList(),
-        UserId = userId
+      var model = new UserViewModel {
+        Flavors = _db.Flavors.ToList(),
+        Treats = _db.Treats.ToList()
       };
-      return View(HomeModel);
+      return View(model);
     }
   }
 }

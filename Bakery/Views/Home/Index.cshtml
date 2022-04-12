@@ -6,80 +6,60 @@
 }
 
 <h2><em>Welcome to Pierre's Bakery</em></h2>
+<p>Make an account or login to add flavors and treats.</p>
 <hr>
 
-@if (User.Identity.IsAuthenticated)
-{
-  <h4>@Html.ActionLink(@User.Identity.Name, "Index", "Account")</h4>
-  <button>@Html.ActionLink("Logout", "Logout", "Account")</button>
-}
-else
-{
-  <button>@Html.ActionLink("Register", "Register", "Account")</button>
-  <button>@Html.ActionLink("Login", "Login", "Account")</button>
-}
-
+<h2>@Html.ActionLink("Treats:", "Index", "Treats")</h2>
 @if (Model.Treats.Count != 0)
 {
-  <h3>All Treats:</h3>
-  @foreach (Flavor f in Model.Flavors)
+  @foreach (Treat t in Model.Treats)
   {
-    <tr>
-    <td>@f.FlavorId</td>
-    <td>@f.Name</td>
-    <td>@f.JoinEntities.Count</td>
-    <td>
-      @Html.ActionLink("Details", "Details", "Flavors", new { id = f.FlavorId })
-      @if (Model.UserId == f.User.Id)
-      {
-        <span> | </span>
-        @Html.ActionLink("Edit", "Edit", "Flavors", new { id = f.FlavorId })
-        <span> | </span>
-        @Html.ActionLink("Delete", "Delete", "Flavors", new { id = f.FlavorId }) 
-      }
-    </td>
-    </tr>
+    <details>
+      <summary>@t.Name</summary>
+      <h6>@Html.ActionLink("Details", "Details", "Treats", new { id = t.TreatId }) •
+      @Html.ActionLink("Edit", "Edit", "Treats", new { id = t.TreatId }) •
+      @Html.ActionLink("Delete", "Delete", "Treats", new { id = t.TreatId })</h6>
+    </details>
   }
 }
 else
 {
-  <h3>There are no treats yet</h3>
+  <h4>There are no treats yet</h4>
 }
 @if (User.Identity.IsAuthenticated)
 {
-  @Html.ActionLink("Add Treat", "Create", "Treats")
+  <h3>@Html.ActionLink("Add Treat", "Create", "Treats")</h3>
+}
+else
+{
+  <h3>Login to add treats</h3>
 }
 
 <hr>
 
+<h2>@Html.ActionLink("Flavors:", "Index", "Flavors")</h2>
 @if (Model.Flavors.Count != 0)
 {
-  <h3>All Flavors:</h3>
   @foreach (Flavor f in Model.Flavors)
   {
-    <tr>
-    <td>@f.FlavorId</td>
-    <td>@f.Name</td>
-    <td>@f.JoinEntities.Count</td>
-    <td>
-      @Html.ActionLink("Details", "Details", "Flavors", new { id = f.FlavorId })
-      @if (Model.UserId == f.User.Id)
-      {
-        <span> | </span>
-        @Html.ActionLink("Edit", "Edit", "Flavors", new { id = f.FlavorId })
-        <span> | </span>
-        @Html.ActionLink("Delete", "Delete", "Flavors", new { id = f.FlavorId }) 
-      }
-    </td>
-    </tr>
+    <details>
+      <summary>@f.Name</summary>
+      <h6>@Html.ActionLink("Details", "Details", "Flavors", new { id = f.FlavorId }) •
+      @Html.ActionLink("Edit", "Edit", "Flavors", new { id = f.FlavorId }) •
+      @Html.ActionLink("Delete", "Delete", "Flavors", new { id = f.FlavorId })</h6>
+    </details>
+    <br>
   }
 }
 else
 {
-  <h3>There are no flavors yet</h3>
+  <h4>There are no flavors yet</h4>
 }
 @if (User.Identity.IsAuthenticated)
 {
-  @Html.ActionLink("Add Flavor", "Create", "Flavors")
+  <h3>@Html.ActionLink("Add Flavor", "Create", "Flavors")</h3>
 }
-<hr>
+else
+{
+  <h3>Login to add a Flavor</h3>
+}

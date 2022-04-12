@@ -6,7 +6,8 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-  <h4>You're logged in</h4>
+  <h4>You're logged in as:</h4>
+  <h2>@User.Identity.Name</h2>
   <a href='@Url.Action("Logout", "Account")'><button type='button'>Logout</button></a>
 }
 else

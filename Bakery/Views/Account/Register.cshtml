@@ -4,7 +4,7 @@
   Layout = "_Layout";
 }
 
-<h1>Register An Account</h1>
+<h1>Register:</h1>
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
   @Html.LabelFor(u => u.Email)
@@ -19,5 +19,5 @@
   @Html.PasswordFor(u => u.ConfirmPassword)
   @Html.ValidationMessageFor(u => u.ConfirmPassword)
   <br>
-  <button>Register</button>
+  <button>Submit</button>
 }
