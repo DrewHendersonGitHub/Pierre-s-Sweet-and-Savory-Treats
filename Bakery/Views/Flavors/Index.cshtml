@@ -12,19 +12,29 @@
 }
 else
 {
-  @foreach (Flavor f in Model)
+  @if (User.Identity.IsAuthenticated)
   {
-    <details>
-      <summary>@f.Name</summary>
-      <h6>@Html.ActionLink("Details", "Details", "Flavors", new { id = f.FlavorId }) •
-      @Html.ActionLink("Edit", "Edit", "Flavors", new { id = f.FlavorId }) •
-      @Html.ActionLink("Delete", "Delete", "Flavors", new { id = f.FlavorId })</h6>
-    </details>
-    <br>
+    @foreach (Flavor f in Model)
+    {
+      <details>
+        <summary>@f.Name</summary>
+        <h6>@Html.ActionLink("Details", "Details", "Flavors", new { id = f.FlavorId }) •
+        @Html.ActionLink("Edit", "Edit", "Flavors", new { id = f.FlavorId }) •
+        @Html.ActionLink("Delete", "Delete", "Flavors", new { id = f.FlavorId })</h6>
+      </details>
+      <br>
+    }
+    <h2>@Html.ActionLink("Add new flavor:", "Create", "Flavors")</h2>
   }
-}
-
-@if (User.Identity.IsAuthenticated)
-{
-  <h2>@Html.ActionLink("Add new flavor:", "Create", "Flavors")</h2>
+  else
+  {
+    @foreach (Flavor f in Model)
+    {
+      <details>
+        <summary>@f.Name</summary>
+        <h6>@Html.ActionLink("Details", "Details", "Flavors", new { id = f.FlavorId })</h6>
+      </details>
+      <br>
+    }
+  }
 }

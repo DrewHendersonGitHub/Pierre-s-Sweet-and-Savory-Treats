@@ -16,17 +16,33 @@ else
 }
 <hr>
 
-<h2>@Html.ActionLink("Treats:", "Index", "Treats")</h2>
+<h3>Are you looking for a particular treat?</h3>
+<h4>@Html.ActionLink("All Treats:", "Index", "Treats")</h4>
 @if (Model.Treats.Count != 0)
 {
-  @foreach (Treat t in Model.Treats)
+  @if (User.Identity.IsAuthenticated)
   {
-    <details>
-      <summary>@t.Name</summary>
-      <h6>@Html.ActionLink("Details", "Details", "Treats", new { id = t.TreatId }) •
-      @Html.ActionLink("Edit", "Edit", "Treats", new { id = t.TreatId }) •
-      @Html.ActionLink("Delete", "Delete", "Treats", new { id = t.TreatId })</h6>
-    </details>
+    @foreach (Treat t in Model.Treats)
+    {
+      <details>
+        <summary>@t.Name</summary>
+        <h6>@Html.ActionLink("Details", "Details", "Treats", new { id = t.TreatId }) •
+        @Html.ActionLink("Edit", "Edit", "Treats", new { id = t.TreatId }) •
+        @Html.ActionLink("Delete", "Delete", "Treats", new { id = t.TreatId })</h6>
+      </details>
+      <br>
+    }
+  }
+  else
+  {
+    @foreach (Treat t in Model.Treats)
+    {
+      <details>
+        <summary>@t.Name</summary>
+        <h6>@Html.ActionLink("Details", "Details", "Treats", new { id = t.TreatId })</h6>
+      </details>
+      <br>
+    }
   }
 }
 else
@@ -44,17 +60,32 @@ else
 
 <hr>
 
-<h2>@Html.ActionLink("Flavors:", "Index", "Flavors")</h2>
+<h3>Do you want find a specific flavor?</h3>
+<h4>@Html.ActionLink("All Flavors:", "Index", "Flavors")</h4>
 @if (Model.Flavors.Count != 0)
 {
-  @foreach (Flavor f in Model.Flavors)
+  @if (User.Identity.IsAuthenticated)
   {
-    <details>
-      <summary>@f.Name</summary>
-      <h6>@Html.ActionLink("Details", "Details", "Flavors", new { id = f.FlavorId }) •
-      @Html.ActionLink("Edit", "Edit", "Flavors", new { id = f.FlavorId }) •
-      @Html.ActionLink("Delete", "Delete", "Flavors", new { id = f.FlavorId })</h6>
-    </details>
+    @foreach (Flavor f in Model.Flavors)
+    {
+      <details>
+        <summary>@f.Name</summary>
+        <h6>@Html.ActionLink("Details", "Details", "Treats", new { id = f.FlavorId }) •
+        @Html.ActionLink("Edit", "Edit", "Treats", new { id = f.FlavorId }) •
+        @Html.ActionLink("Delete", "Delete", "Treats", new { id = f.FlavorId })</h6>
+      </details>
+      <br>
+    }
+  }
+  else
+  {
+    @foreach (Flavor f in Model.Flavors)
+    {
+      <details>
+        <summary>@f.Name</summary>
+        <h6>@Html.ActionLink("Details", "Details", "Treats", new { id = f.FlavorId })</h6>
+      </details>
+    }
   }
 }
 else

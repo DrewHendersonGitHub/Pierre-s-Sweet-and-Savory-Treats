@@ -12,19 +12,29 @@
 }
 else
 {
-  @foreach (Treat t in Model)
+  @if (User.Identity.IsAuthenticated)
   {
-    <details>
-      <summary>@t.Name</summary>
-      <h6>@Html.ActionLink("Details", "Details", "Treats", new { id = t.TreatId }) •
-      @Html.ActionLink("Edit", "Edit", "Treats", new { id = t.TreatId }) •
-      @Html.ActionLink("Delete", "Delete", "Treats", new { id = t.TreatId })</h6>
-    </details>
-    <br>
+    @foreach (Treat t in Model)
+    {
+      <details>
+        <summary>@t.Name</summary>
+        <h6>@Html.ActionLink("Details", "Details", "Treats", new { id = t.TreatId }) •
+        @Html.ActionLink("Edit", "Edit", "Treats", new { id = t.TreatId }) •
+        @Html.ActionLink("Delete", "Delete", "Treats", new { id = t.TreatId })</h6>
+      </details>
+      <br>
+    }
+    <h2>@Html.ActionLink("Add new treat:", "Create", "Treats")</h2>
   }
-}
-
-@if (User.Identity.IsAuthenticated)
-{
-  <h2>@Html.ActionLink("Add new treat:", "Create", "Treats")</h2>
+  else
+  {
+    @foreach (Treat t in Model)
+    {
+      <details>
+        <summary>@t.Name</summary>
+        <h6>@Html.ActionLink("Details", "Details", "Treats", new { id = t.TreatId })</h6>
+      </details>
+      <br>
+    }
+  }
 }
