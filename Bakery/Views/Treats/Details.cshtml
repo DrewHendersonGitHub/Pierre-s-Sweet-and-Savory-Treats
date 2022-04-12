@@ -7,17 +7,24 @@
 <h5>Treat:</h5>
 <h2>@Model.Name</h2>
 <hr>
-<p>Treat ID: @Model.TreatId</p>  
-<p>Flavors Amount: @Model.JoinEntities.Count()</p>
+<p>Treat ID: @Model.TreatId</p>
 
 @if (User.Identity.IsAuthenticated)
 {
   <a href='@Url.Action("Edit", "Treats", new { id = Model.TreatId })'><button type='button'>Edit Treat</button></a>
   <a href='@Url.Action("Delete", "Treats", new { id = Model.TreatId })'><button type='button'>Delete Treat</button></a>
+  <h3>@Html.ActionLink("Add Flavor", "AddFlavor", new { id = Model.TreatId })</h3>
 }
 
 @if (Model.JoinEntities.Count() > 0)
 {
   <h5>Flavors:</h5>
-  
+  @foreach(var join in Model.JoinEntities)
+  {
+    <li>@Html.ActionLink($"{@join.Flavor.Name}", "Details", "Flavors", new { id = join.Flavor.FlavorId })</li>
+  }
+}
+else
+{
+  <h5>No Flavors Yet</h5>
 }

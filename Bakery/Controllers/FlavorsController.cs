@@ -48,8 +48,31 @@ namespace Bakery.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Flavor flavor, int[] TreatId)
+    public ActionResult Edit(Flavor flavor, int TreatId)
     {
+      if (TreatId != 0)
+      {
+        _db.FlavorTreat.Add(new FlavorTreat() { FlavorId = flavor.FlavorId, TreatId = TreatId });
+      }
+      _db.Entry(flavor).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult AddTreat(int id)
+    {
+      var thisFlavor = _db.Flavors.FirstOrDefault(f => f.FlavorId == id);
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
+      return View(thisFlavor);
+    }
+
+    [HttpPost]
+    public ActionResult AddTreat(Flavor flavor, int TreatId)
+    {
+      if (TreatId != 0)
+      {
+      _db.FlavorTreat.Add(new FlavorTreat() { FlavorId = flavor.FlavorId, TreatId = TreatId });
+      }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

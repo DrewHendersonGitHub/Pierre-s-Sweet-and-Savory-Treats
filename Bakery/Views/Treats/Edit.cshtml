@@ -1,4 +1,4 @@
-@model Bakery.Models.Flavor
+@model Bakery.Models.Treat
 
 @{
   Layout = "_Layout";
@@ -8,7 +8,7 @@
 
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(f => f.FlavorId)
+  @Html.HiddenFor(t => t.TreatId)
 
   @Html.LabelFor(model => model.Name)
   @Html.EditorFor(model => model.Name)
